@@ -258,9 +258,7 @@ function selecteerRol(rol) {
 async function inloggenWerkgroep() {
   const ww = document.getElementById('werkgroepWachtwoord').value;
   if (!ww) { toonLoginFout('Vul het wachtwoord in.'); return; }
-  const hash = await hashWachtwoord(ww);
-  const opgeslagenHash = localStorage.getItem('mkb_werkgroep_hash');
-  if (hash === opgeslagenHash || ww === atob(localStorage.getItem('mkb_ww') || '')) {
+  if (ww === 'Werkgroep2026') {
     huidigeRol = 'werkgroep';
     sessionStorage.setItem('mkb_rol', 'werkgroep');
     toonApp();
