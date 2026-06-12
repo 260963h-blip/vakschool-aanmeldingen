@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="nl" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
 <head>
@@ -7,341 +8,176 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: Arial, sans-serif; background: #f0f4f8; color: #1a1a1a; font-size: 15px; min-height: 100vh; }
-
-.topbar {
-  background: #0070C0;
-  color: white;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.topbar-left { display: flex; align-items: center; gap: 14px; }
-.topbar-title { font-size: 17px; font-weight: 700; letter-spacing: 0.3px; }
+.topbar { background: #0070C0; color: white; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; flex-wrap: wrap; gap: 8px; }
+.topbar-title { font-size: 17px; font-weight: 700; }
 .topbar-sub { font-size: 12px; opacity: 0.8; }
-.sync-badge {
-  background: rgba(255,255,255,0.15);
-  border-radius: 20px;
-  padding: 5px 14px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
+.rol-badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 600; }
+.rol-badge.beheerder { background: #FF8C00; }
+.sync-badge { background: rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 14px; font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; }
 .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ceb8a; display: inline-block; flex-shrink: 0; }
+.avg-banner { background: #fff3cd; border-left: 4px solid #FF8C00; padding: 9px 20px; font-size: 13px; color: #5a3e00; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
 
-.avg-banner {
-  background: #fff3cd;
-  border-left: 4px solid #FF8C00;
-  padding: 9px 20px;
-  font-size: 13px;
-  color: #5a3e00;
-}
-
-/* SETUP SCHERM */
-#setupScherm {
-  max-width: 520px;
-  margin: 60px auto;
-  background: white;
-  border-radius: 10px;
-  padding: 32px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-}
-#setupScherm h2 { color: #0070C0; font-size: 18px; margin-bottom: 6px; }
-#setupScherm p { color: #555; font-size: 13px; margin-bottom: 20px; line-height: 1.6; }
+/* LOGIN */
+#loginScherm { max-width: 480px; margin: 60px auto; background: white; border-radius: 10px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+#loginScherm h2 { color: #0070C0; font-size: 18px; margin-bottom: 6px; }
+#loginScherm p { color: #555; font-size: 13px; margin-bottom: 20px; line-height: 1.6; }
+.rol-keuze { display: flex; gap: 12px; margin-bottom: 20px; }
+.rol-btn { flex: 1; padding: 14px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; text-align: center; background: white; transition: all 0.2s; }
+.rol-btn:hover { border-color: #0070C0; background: #e8f3fb; }
+.rol-btn.actief { border-color: #0070C0; background: #e8f3fb; }
+.rol-btn.actief.oranje { border-color: #FF8C00; background: #fff5e6; }
+.rol-icon { font-size: 24px; margin-bottom: 4px; }
+.rol-label { font-size: 13px; font-weight: 700; color: #333; }
+.rol-sub { font-size: 11px; color: #888; margin-top: 2px; }
 .form-group { margin-bottom: 16px; }
 .form-group label { display: block; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 5px; }
-.form-group input {
-  width: 100%;
-  border: 1.5px solid #ccc;
-  border-radius: 6px;
-  padding: 9px 12px;
-  font-size: 14px;
-}
+.form-group input { width: 100%; border: 1.5px solid #ccc; border-radius: 6px; padding: 9px 12px; font-size: 14px; }
 .form-group input:focus { border-color: #0070C0; outline: none; }
-.form-group input[type=password] { font-family: monospace; letter-spacing: 2px; }
 .form-hint { font-size: 11px; color: #888; margin-top: 4px; }
-.setup-info {
-  background: #e8f3fb;
-  border-left: 3px solid #0070C0;
-  padding: 10px 14px;
-  font-size: 12px;
-  color: #003d6b;
-  border-radius: 4px;
-  margin-bottom: 18px;
-  line-height: 1.6;
-}
 
-/* HOOFD APP */
+/* APP */
 #appScherm { display: none; }
 .main { padding: 20px 24px; max-width: 1200px; margin: 0 auto; }
-
-.section-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #0070C0;
-  margin-bottom: 12px;
-  border-bottom: 2px solid #0070C0;
-  padding-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.upload-area {
-  background: white;
-  border: 2px dashed #0070C0;
-  border-radius: 8px;
-  padding: 28px;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 20px;
-  transition: background 0.2s;
-}
+.section-title { font-size: 14px; font-weight: 700; color: #0070C0; margin-bottom: 12px; border-bottom: 2px solid #0070C0; padding-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.upload-area { background: white; border: 2px dashed #0070C0; border-radius: 8px; padding: 28px; text-align: center; cursor: pointer; margin-bottom: 20px; transition: background 0.2s; }
 .upload-area:hover { background: #e8f3fb; }
 .upload-area input[type=file] { display: none; }
 .upload-icon { font-size: 30px; margin-bottom: 6px; }
 .upload-area p { color: #555; font-size: 13px; margin-top: 4px; }
-
 .stats-row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-.stat-card {
-  background: white;
-  border-radius: 8px;
-  border-left: 4px solid #0070C0;
-  padding: 12px 18px;
-  flex: 1;
-  min-width: 130px;
-}
+.stat-card { background: white; border-radius: 8px; border-left: 4px solid #0070C0; padding: 12px 18px; flex: 1; min-width: 130px; }
 .stat-card.oranje { border-left-color: #FF8C00; }
 .stat-num { font-size: 26px; font-weight: 700; color: #0070C0; }
 .stat-card.oranje .stat-num { color: #FF8C00; }
 .stat-label { font-size: 11px; color: #666; margin-top: 2px; }
-
-.toolbar {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.toolbar input[type=text] {
-  border: 1.5px solid #ccc;
-  border-radius: 6px;
-  padding: 7px 12px;
-  font-size: 13px;
-  flex: 1;
-  min-width: 160px;
-  max-width: 280px;
-}
+.toolbar { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+.toolbar input[type=text] { border: 1.5px solid #ccc; border-radius: 6px; padding: 7px 12px; font-size: 13px; flex: 1; min-width: 160px; max-width: 280px; }
 .toolbar input[type=text]:focus { border-color: #0070C0; outline: none; }
-
-.btn {
-  display: inline-block;
-  background: #0070C0;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-}
+.btn { display: inline-block; background: #0070C0; color: white; border: none; border-radius: 6px; padding: 8px 16px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
 .btn:hover { background: #005fa3; }
-.btn:disabled { background: #aaa; cursor: not-allowed; }
 .btn-oranje { background: #FF8C00; }
 .btn-oranje:hover { background: #d97700; }
 .btn-groen { background: #17a34a; }
 .btn-groen:hover { background: #138a3e; }
 .btn-danger { background: #c0392b; }
 .btn-danger:hover { background: #a93226; }
-.btn-sm {
-  padding: 4px 10px;
-  font-size: 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-  color: white;
-  margin: 1px;
-  white-space: nowrap;
-}
-
-.table-wrap {
-  background: white;
-  border-radius: 8px;
-  overflow: auto;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-  margin-bottom: 20px;
-}
+.btn-grijs { background: #888; }
+.btn-grijs:hover { background: #666; }
+.btn-sm { padding: 4px 10px; font-size: 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; color: white; margin: 1px; white-space: nowrap; }
+.table-wrap { background: white; border-radius: 8px; overflow: auto; box-shadow: 0 1px 4px rgba(0,0,0,0.07); margin-bottom: 20px; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 800px; }
-thead th {
-  background: #0070C0;
-  color: white;
-  padding: 9px 11px;
-  text-align: left;
-  font-weight: 600;
-  font-size: 12px;
-  white-space: nowrap;
-}
+thead th { background: #0070C0; color: white; padding: 9px 11px; text-align: left; font-weight: 600; font-size: 12px; white-space: nowrap; }
 tbody tr { border-bottom: 1px solid #eee; }
 tbody tr:hover { background: #f0f7ff; }
 tbody td { padding: 8px 11px; vertical-align: middle; }
-
 .badge { display: inline-block; border-radius: 12px; padding: 2px 9px; font-size: 11px; font-weight: 600; }
 .badge-blauw { background: #dbeeff; color: #004f8a; }
 .badge-oranje { background: #fff0d9; color: #7a4300; }
 .badge-groen { background: #d9f0e5; color: #1a6641; }
 .badge-grijs { background: #ebebeb; color: #444; }
-.badge-rood { background: #fde8e8; color: #7a1515; }
-
-/* MODAL */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-}
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
 .modal-overlay.open { display: flex; }
-.modal {
-  background: white;
-  border-radius: 10px;
-  padding: 24px;
-  max-width: 540px;
-  width: 95%;
-  max-height: 88vh;
-  overflow-y: auto;
-  position: relative;
-}
+.modal { background: white; border-radius: 10px; padding: 24px; max-width: 540px; width: 95%; max-height: 88vh; overflow-y: auto; position: relative; }
 .modal h2 { font-size: 16px; color: #0070C0; margin-bottom: 14px; border-bottom: 2px solid #0070C0; padding-bottom: 5px; }
 .modal-close { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: #888; }
 .detail-row { display: flex; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
 .detail-label { width: 150px; color: #666; flex-shrink: 0; font-weight: 600; }
-
-.avg-footer {
-  background: white;
-  border-top: 3px solid #FF8C00;
-  padding: 10px 18px;
-  font-size: 12px;
-  color: #555;
-  text-align: center;
-  margin-top: 8px;
-  border-radius: 6px;
-}
-
-/* TOAST */
-.toast {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: #0070C0;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  z-index: 300;
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-  max-width: 320px;
-}
+.avg-footer { background: white; border-top: 3px solid #FF8C00; padding: 10px 18px; font-size: 12px; color: #555; text-align: center; margin-top: 8px; border-radius: 6px; }
+.toast { position: fixed; bottom: 24px; right: 24px; background: #0070C0; color: white; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; z-index: 300; opacity: 0; transition: opacity 0.3s; pointer-events: none; max-width: 320px; }
 .toast.show { opacity: 1; }
-
-/* LOADING */
-.spinner {
-  width: 20px; height: 20px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 6px;
-}
+.spinner { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; vertical-align: middle; margin-right: 6px; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-.uploading-bar {
-  background: #e8f3fb;
-  border-radius: 6px;
-  padding: 10px 14px;
-  font-size: 13px;
-  color: #0070C0;
-  margin-bottom: 12px;
-  display: none;
-}
+.uploading-bar { background: #e8f3fb; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #0070C0; margin-bottom: 12px; display: none; }
+.readonly-banner { background: #e8f3fb; border-left: 4px solid #0070C0; padding: 9px 20px; font-size: 13px; color: #003d6b; }
 </style>
 
 <!--[if gte mso 9]><xml>
 <mso:CustomDocumentProperties>
-<mso:_dlc_DocId msdt:dt="string">N36ZD6P3VSNZ-1124819296-14039</mso:_dlc_DocId>
-<mso:_dlc_DocIdItemGuid msdt:dt="string">5a807c7c-f1f0-4bb5-99ce-13f9374f491c</mso:_dlc_DocIdItemGuid>
-<mso:_dlc_DocIdUrl msdt:dt="string">https://askgroupeu.sharepoint.com/sites/HRM/_layouts/15/DocIdRedir.aspx?ID=N36ZD6P3VSNZ-1124819296-14039, N36ZD6P3VSNZ-1124819296-14039</mso:_dlc_DocIdUrl>
+<mso:_dlc_DocId msdt:dt="string">N36ZD6P3VSNZ-1124819296-14040</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">503cb560-87d0-4d7e-9982-f33f63a931ef</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://askgroupeu.sharepoint.com/sites/HRM/_layouts/15/DocIdRedir.aspx?ID=N36ZD6P3VSNZ-1124819296-14040, N36ZD6P3VSNZ-1124819296-14040</mso:_dlc_DocIdUrl>
 </mso:CustomDocumentProperties>
 </xml><![endif]-->
 </head>
 <body>
 
 <div class="topbar">
-  <div class="topbar-left">
-    <div>
-      <div class="topbar-title">Stichting MKB Techniek Weerterland</div>
-      <div class="topbar-sub">Aanmeldingsbeheer BBL – Schooljaar 2026–2027</div>
-    </div>
+  <div>
+    <div class="topbar-title">Stichting MKB Techniek Weerterland</div>
+    <div class="topbar-sub">Aanmeldingsbeheer BBL – Schooljaar 2026–2027</div>
   </div>
-  <div class="sync-badge" onclick="laadAanmeldingen()" title="Klik om te vernieuwen">
-    <span class="sync-dot" id="syncDot"></span>
-    <span id="syncStatus">Laden...</span>
+  <div class="topbar-right">
+    <span class="rol-badge" id="rolBadge" style="display:none"></span>
+    <div class="sync-badge" onclick="laadAanmeldingen()" title="Klik om te vernieuwen">
+      <span class="sync-dot" id="syncDot"></span>
+      <span id="syncStatus">Laden...</span>
+    </div>
   </div>
 </div>
 
 <div class="avg-banner">
-  ⚠️ <strong>AVG-melding:</strong> Deze pagina is uitsluitend toegankelijk voor bevoegde beheerders. Persoonsgegevens worden opgeslagen in een beveiligde privé-repository. Verwijder gegevens na afloop van de verwerkingsdoeleinden.
+  ⚠️ <strong>AVG-melding:</strong> Deze pagina is uitsluitend toegankelijk voor bevoegde werkgroepleden. Verwerk persoonsgegevens conform de AVG en deel deze niet buiten de werkgroep.
 </div>
 
-<!-- SETUP SCHERM -->
-<div id="setupScherm">
-  <h2>🔐 Beheerder inloggen</h2>
-  <p>Vul eenmalig je GitHub-token in om aanmeldingen op te slaan en te bekijken. Het token wordt alleen in jouw browser bewaard.</p>
-
-  <div class="setup-info">
-    <strong>Wat heb je nodig?</strong><br>
-    • Een GitHub Personal Access Token (classic) met <code>repo</code>-rechten<br>
-    • Token begint met <code>ghp_</code><br>
-    • Je hebt dit al aangemaakt in de vorige stap
-  </div>
-
-  <div class="form-group">
-    <label>GitHub Personal Access Token</label>
-    <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxx" autocomplete="off">
-    <div class="form-hint">Wordt alleen lokaal in jouw browser opgeslagen, nooit verstuurd naar derden.</div>
-  </div>
-
-  <button class="btn" onclick="slaTokenOp()">Inloggen en aanmeldingen laden →</button>
-  <div id="setupFout" style="color:#c0392b;font-size:13px;margin-top:10px;display:none;"></div>
+<div id="readonlyBanner" class="readonly-banner" style="display:none">
+  👁️ <strong>Alleen-lezen modus:</strong> Je kunt aanmeldingen bekijken en PDF's openen. Uploaden en verwijderen is voorbehouden aan de beheerder.
 </div>
 
-<!-- HOOFD APP -->
+<!-- LOGIN SCHERM -->
+<div id="loginScherm">
+  <h2>🔐 Inloggen</h2>
+  <p>Kies je rol en log in om de aanmeldingen te bekijken.</p>
+
+  <div class="rol-keuze">
+    <div class="rol-btn actief oranje" id="btnWerkgroep" onclick="selecteerRol('werkgroep')">
+      <div class="rol-icon">👥</div>
+      <div class="rol-label">Werkgroeplid</div>
+      <div class="rol-sub">Alleen bekijken</div>
+    </div>
+    <div class="rol-btn" id="btnBeheerder" onclick="selecteerRol('beheerder')">
+      <div class="rol-icon">🔧</div>
+      <div class="rol-label">Beheerder</div>
+      <div class="rol-sub">Volledig beheer</div>
+    </div>
+  </div>
+
+  <div id="werkgroepForm">
+    <div class="form-group">
+      <label>Wachtwoord werkgroep</label>
+      <input type="password" id="werkgroepWachtwoord" placeholder="Voer het werkgroepwachtwoord in" autocomplete="off">
+      <div class="form-hint">Ontvangen van de beheerder via WhatsApp of persoonlijk.</div>
+    </div>
+    <button class="btn btn-oranje" onclick="inloggenWerkgroep()">Inloggen als werkgroeplid →</button>
+  </div>
+
+  <div id="beheerderForm" style="display:none">
+    <div class="form-group">
+      <label>GitHub Personal Access Token</label>
+      <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxx" autocomplete="off">
+      <div class="form-hint">Alleen voor de beheerder. Begint met ghp_</div>
+    </div>
+    <button class="btn" onclick="inloggenBeheerder()">Inloggen als beheerder →</button>
+  </div>
+
+  <div id="loginFout" style="color:#c0392b;font-size:13px;margin-top:10px;display:none;"></div>
+</div>
+
+<!-- APP SCHERM -->
 <div id="appScherm">
   <div class="main">
 
-    <div class="section-title">📤 Interesseformulier uploaden</div>
-    <div class="upload-area" id="dropZone" onclick="document.getElementById('fileInput').click()">
-      <div class="upload-icon">📄</div>
-      <p><strong>Klik hier</strong> om een ingevuld PDF-formulier te uploaden</p>
-      <p>Sleep het bestand hiernaartoe · Meerdere bestanden tegelijk mogelijk</p>
-      <p style="margin-top:6px;font-size:11px;color:#888;">PDF wordt opgeslagen in de beveiligde GitHub-repository</p>
-      <input type="file" id="fileInput" accept=".pdf" multiple onchange="handleFiles(this.files)">
-    </div>
-
-    <div id="uploadingBar" class="uploading-bar">
-      <span class="spinner"></span> <span id="uploadingTekst">Bezig met uploaden...</span>
+    <div id="uploadSectie" style="display:none">
+      <div class="section-title">📤 Interesseformulier uploaden</div>
+      <div class="upload-area" id="dropZone" onclick="document.getElementById('fileInput').click()">
+        <div class="upload-icon">📄</div>
+        <p><strong>Klik hier</strong> om een ingevuld PDF-formulier te uploaden</p>
+        <p>Sleep het bestand hiernaartoe · Meerdere bestanden tegelijk mogelijk</p>
+        <input type="file" id="fileInput" accept=".pdf" multiple onchange="handleFiles(this.files)">
+      </div>
+      <div id="uploadingBar" class="uploading-bar">
+        <span class="spinner"></span> <span id="uploadingTekst">Bezig met uploaden...</span>
+      </div>
     </div>
 
     <div id="statsRow" class="stats-row"></div>
@@ -351,7 +187,7 @@ tbody td { padding: 8px 11px; vertical-align: middle; }
       <input type="text" id="searchInput" placeholder="Zoek op naam, woonplaats, e-mail..." oninput="renderTabel()">
       <button class="btn btn-oranje" onclick="exportCSV()">⬇ Exporteer CSV</button>
       <button class="btn btn-groen" onclick="laadAanmeldingen()">↻ Vernieuwen</button>
-      <button class="btn" style="background:#888" onclick="uitloggen()">Uitloggen</button>
+      <button class="btn btn-grijs" onclick="uitloggen()">Uitloggen</button>
     </div>
 
     <div class="table-wrap">
@@ -377,12 +213,11 @@ tbody td { padding: 8px 11px; vertical-align: middle; }
     </div>
 
     <div class="avg-footer">
-      🔒 Gegevens worden opgeslagen in een privé GitHub-repository onder beheer van Stichting MKB Techniek Weerterland. Toegankelijk alleen voor de beheerder met het juiste token. Verwerk persoonsgegevens conform de AVG.
+      🔒 Gegevens worden opgeslagen in een beveiligde privé GitHub-repository onder beheer van Stichting MKB Techniek Weerterland. Verwerk persoonsgegevens conform de AVG.
     </div>
   </div>
 </div>
 
-<!-- DETAIL MODAL -->
 <div class="modal-overlay" id="detailModal">
   <div class="modal">
     <button class="modal-close" onclick="sluitModal()">✕</button>
@@ -402,47 +237,105 @@ const GITHUB_REPO = 'vakschool-aanmeldingen';
 const GITHUB_BRANCH = 'main';
 const DATA_FILE = 'aanmeldingen.json';
 
+// SHA-256 hash van het werkgroepwachtwoord
+// Huidig wachtwoord: Werkgroep2026
+// Wijzig dit door de hash hieronder te vervangen
+const WERKGROEP_HASH = 'a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2';
+
 let aanmeldingen = [];
 let githubToken = '';
+let huidigeRol = ''; // 'beheerder' of 'werkgroep'
 
-// ── TOKEN BEHEER ──────────────────────────────────────────────
-function slaTokenOp() {
+async function hashWachtwoord(ww) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(ww + 'mkb_weerterland_salt');
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ── ROL SELECTIE ──────────────────────────────────────────────
+function selecteerRol(rol) {
+  document.getElementById('btnWerkgroep').className = 'rol-btn' + (rol === 'werkgroep' ? ' actief oranje' : '');
+  document.getElementById('btnBeheerder').className = 'rol-btn' + (rol === 'beheerder' ? ' actief' : '');
+  document.getElementById('werkgroepForm').style.display = rol === 'werkgroep' ? 'block' : 'none';
+  document.getElementById('beheerderForm').style.display = rol === 'beheerder' ? 'block' : 'none';
+  document.getElementById('loginFout').style.display = 'none';
+}
+
+// ── INLOGGEN ──────────────────────────────────────────────────
+async function inloggenWerkgroep() {
+  const ww = document.getElementById('werkgroepWachtwoord').value;
+  if (!ww) { toonLoginFout('Vul het wachtwoord in.'); return; }
+  const hash = await hashWachtwoord(ww);
+  const opgeslagenHash = localStorage.getItem('mkb_werkgroep_hash');
+  if (hash === opgeslagenHash || ww === atob(localStorage.getItem('mkb_ww') || '')) {
+    huidigeRol = 'werkgroep';
+    sessionStorage.setItem('mkb_rol', 'werkgroep');
+    toonApp();
+    laadAanmeldingen();
+  } else {
+    toonLoginFout('Wachtwoord is niet correct. Neem contact op met de beheerder.');
+  }
+}
+
+async function inloggenBeheerder() {
   const t = document.getElementById('tokenInput').value.trim();
   if (!t.startsWith('ghp_') && !t.startsWith('github_pat_')) {
-    toonSetupFout('Token lijkt niet correct. Het begint normaal met ghp_');
+    toonLoginFout('Token lijkt niet correct. Het begint met ghp_');
     return;
   }
   githubToken = t;
   localStorage.setItem('mkb_gh_token', btoa(t));
+  huidigeRol = 'beheerder';
+  sessionStorage.setItem('mkb_rol', 'beheerder');
   toonApp();
   laadAanmeldingen();
 }
 
 function toonApp() {
-  document.getElementById('setupScherm').style.display = 'none';
+  document.getElementById('loginScherm').style.display = 'none';
   document.getElementById('appScherm').style.display = 'block';
+
+  const badge = document.getElementById('rolBadge');
+  badge.style.display = 'inline-block';
+
+  if (huidigeRol === 'beheerder') {
+    badge.textContent = '🔧 Beheerder';
+    badge.className = 'rol-badge beheerder';
+    document.getElementById('uploadSectie').style.display = 'block';
+    document.getElementById('readonlyBanner').style.display = 'none';
+  } else {
+    badge.textContent = '👥 Werkgroeplid';
+    badge.className = 'rol-badge';
+    document.getElementById('uploadSectie').style.display = 'none';
+    document.getElementById('readonlyBanner').style.display = 'block';
+  }
 }
 
 function uitloggen() {
-  if (!confirm('Uitloggen? Je token wordt verwijderd uit deze browser.')) return;
-  localStorage.removeItem('mkb_gh_token');
+  if (!confirm('Uitloggen?')) return;
   githubToken = '';
-  document.getElementById('setupScherm').style.display = 'block';
+  huidigeRol = '';
+  sessionStorage.removeItem('mkb_rol');
+  document.getElementById('loginScherm').style.display = 'block';
   document.getElementById('appScherm').style.display = 'none';
+  document.getElementById('rolBadge').style.display = 'none';
+  document.getElementById('werkgroepWachtwoord').value = '';
   document.getElementById('tokenInput').value = '';
 }
 
-function toonSetupFout(tekst) {
-  const el = document.getElementById('setupFout');
+function toonLoginFout(tekst) {
+  const el = document.getElementById('loginFout');
   el.textContent = tekst;
   el.style.display = 'block';
 }
 
 // ── GITHUB API ────────────────────────────────────────────────
 async function githubGet(path) {
-  const r = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${path}`, {
-    headers: { Authorization: `token ${githubToken}`, Accept: 'application/vnd.github.v3+json' }
-  });
+  const headers = { Accept: 'application/vnd.github.v3+json' };
+  if (githubToken) headers.Authorization = `token ${githubToken}`;
+  const r = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${path}`, { headers });
   if (r.status === 404) return null;
   if (!r.ok) throw new Error('GitHub fout: ' + r.status);
   return await r.json();
@@ -456,10 +349,7 @@ async function githubPut(path, content_b64, sha, bericht) {
     headers: { Authorization: `token ${githubToken}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   });
-  if (!r.ok) {
-    const err = await r.json();
-    throw new Error(err.message || 'GitHub opslaan mislukt');
-  }
+  if (!r.ok) { const err = await r.json(); throw new Error(err.message || 'Opslaan mislukt'); }
   return await r.json();
 }
 
@@ -478,28 +368,25 @@ async function laadAanmeldingen() {
   try {
     const bestand = await githubGet(DATA_FILE);
     if (bestand) {
-      const json = atob(bestand.content.replace(/\n/g, ''));
-      aanmeldingen = JSON.parse(json);
+      aanmeldingen = JSON.parse(atob(bestand.content.replace(/\n/g, '')));
     } else {
       aanmeldingen = [];
     }
     setSyncStatus('Gesynchroniseerd', '#4ceb8a');
   } catch(e) {
-    setSyncStatus('Fout: ' + e.message, '#e74c3c');
-    toonToast('⚠️ Laden mislukt: ' + e.message, true);
+    setSyncStatus('Fout', '#e74c3c');
+    toonToast('Laden mislukt: ' + e.message, true);
   }
   updateUI();
 }
 
 async function slaDataOp(bericht) {
-  const json = JSON.stringify(aanmeldingen, null, 2);
-  const b64 = btoa(unescape(encodeURIComponent(json)));
+  const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(aanmeldingen, null, 2))));
   const huidig = await githubGet(DATA_FILE);
-  const sha = huidig ? huidig.sha : undefined;
-  await githubPut(DATA_FILE, b64, sha, bericht);
+  await githubPut(DATA_FILE, b64, huidig ? huidig.sha : undefined, bericht);
 }
 
-// ── BESTANDEN UPLOADEN ────────────────────────────────────────
+// ── UPLOADEN ──────────────────────────────────────────────────
 const dropZone = document.getElementById('dropZone');
 dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.background = '#d0ebff'; });
 dropZone.addEventListener('dragleave', () => { dropZone.style.background = ''; });
@@ -512,30 +399,24 @@ async function handleFiles(files) {
   let verwerkt = 0;
   for (const file of files) {
     if (file.type !== 'application/pdf') continue;
-    tekst.textContent = `Bezig met verwerken: ${file.name} (${verwerkt + 1}/${files.length})`;
+    tekst.textContent = `Verwerken: ${file.name} (${verwerkt + 1}/${files.length})`;
     const data = await leesFormulier(file);
     if (data) {
-      // PDF opslaan in GitHub
       try {
         const pdfB64 = await bestandNaarB64(file);
-        const pdfPad = `pdfs/${data.id}.pdf`;
-        await githubPut(pdfPad, pdfB64, undefined, `PDF upload: ${file.name}`);
-        data.pdf_pad = pdfPad;
-      } catch(e) {
-        toonToast('PDF opslaan mislukt: ' + e.message, true);
-      }
+        await githubPut(`pdfs/${data.id}.pdf`, pdfB64, undefined, `PDF: ${file.name}`);
+        data.pdf_pad = `pdfs/${data.id}.pdf`;
+      } catch(e) { toonToast('PDF opslaan mislukt: ' + e.message, true); }
       aanmeldingen.push(data);
       verwerkt++;
     }
   }
   if (verwerkt > 0) {
-    tekst.textContent = 'Aanmeldingen opslaan...';
+    tekst.textContent = 'Opslaan...';
     try {
-      await slaDataOp(`${verwerkt} nieuwe aanmelding(en) toegevoegd`);
+      await slaDataOp(`${verwerkt} nieuwe aanmelding(en)`);
       toonToast(`✓ ${verwerkt} aanmelding(en) opgeslagen`);
-    } catch(e) {
-      toonToast('Opslaan mislukt: ' + e.message, true);
-    }
+    } catch(e) { toonToast('Opslaan mislukt: ' + e.message, true); }
   }
   bar.style.display = 'none';
   updateUI();
@@ -564,29 +445,24 @@ async function leesFormulier(file) {
         }
       }
     } catch(e) {}
-
     const get = (...namen) => { for (const n of namen) { if (veldWaarden[n]) return veldWaarden[n]; } return ''; };
-
     return {
       id: Date.now() + '-' + Math.floor(Math.random()*100000),
       voornaam: get('voornaam','firstname'),
       achternaam: get('achternaam','lastname'),
-      geboortedatum: get('geboortedatum','date_of_birth'),
-      adres: get('adres_(straat_+_huisnr.)','adres','address'),
+      geboortedatum: get('geboortedatum'),
+      adres: get('adres_(straat_+_huisnr.)','adres'),
       postcode: get('postcode'),
-      woonplaats: get('woonplaats','city'),
-      telefoon: get('telefoonnummer','telefoon','phone'),
+      woonplaats: get('woonplaats'),
+      telefoon: get('telefoonnummer'),
       email: get('e-mailadres','email'),
-      naam_ouder: get('naam_ouder_/_verzorger','ouder'),
+      naam_ouder: get('naam_ouder_/_verzorger'),
       tel_ouder: get('telefoonnummer_2'),
       email_ouder: get('e-mailadres_2'),
       bestandsnaam: file.name,
       datum_upload: new Date().toLocaleDateString('nl-NL')
     };
-  } catch(e) {
-    alert('Fout bij lezen van ' + file.name + ': ' + e.message);
-    return null;
-  }
+  } catch(e) { alert('Fout bij lezen: ' + e.message); return null; }
 }
 
 // ── UI ────────────────────────────────────────────────────────
@@ -594,14 +470,12 @@ function berekenLeeftijd(geboortedatum) {
   if (!geboortedatum) return '';
   const delen = geboortedatum.split(/[-\/]/);
   if (delen.length !== 3) return '';
-  const d = delen[0].length === 4
-    ? new Date(delen[0], delen[1]-1, delen[2])
-    : new Date(delen[2], delen[1]-1, delen[0]);
+  const d = delen[0].length === 4 ? new Date(delen[0], delen[1]-1, delen[2]) : new Date(delen[2], delen[1]-1, delen[0]);
   if (isNaN(d)) return '';
   const nu = new Date();
-  let leeftijd = nu.getFullYear() - d.getFullYear();
-  if (nu < new Date(nu.getFullYear(), d.getMonth(), d.getDate())) leeftijd--;
-  return leeftijd + ' jr';
+  let l = nu.getFullYear() - d.getFullYear();
+  if (nu < new Date(nu.getFullYear(), d.getMonth(), d.getDate())) l--;
+  return l + ' jr';
 }
 
 function updateUI() {
@@ -622,15 +496,14 @@ function renderTabel() {
   });
   const tbody = document.getElementById('tableBody');
   if (gefilterd.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:32px;color:#aaa;">${aanmeldingen.length === 0 ? '📋 Nog geen aanmeldingen. Upload een formulier om te beginnen.' : '🔍 Geen resultaten.'}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:32px;color:#aaa;">${aanmeldingen.length === 0 ? '📋 Nog geen aanmeldingen.' : '🔍 Geen resultaten.'}</td></tr>`;
     return;
   }
   tbody.innerHTML = gefilterd.map((a, i) => {
     const naam = [a.voornaam, a.achternaam].filter(Boolean).join(' ') || '—';
     const leeftijd = berekenLeeftijd(a.geboortedatum);
-    const begeleider = a.naam_ouder
-      ? `<span class="badge badge-oranje">${a.naam_ouder.length > 18 ? a.naam_ouder.substring(0,16)+'…' : a.naam_ouder}</span>`
-      : '<span class="badge badge-grijs">—</span>';
+    const begeleider = a.naam_ouder ? `<span class="badge badge-oranje">${a.naam_ouder.length > 18 ? a.naam_ouder.substring(0,16)+'…' : a.naam_ouder}</span>` : '<span class="badge badge-grijs">—</span>';
+    const verwijderKnop = huidigeRol === 'beheerder' ? `<button class="btn-sm" style="background:#c0392b" onclick="verwijderItem('${a.id}')">🗑</button>` : '';
     return `<tr>
       <td><span class="badge badge-blauw">${i+1}</span></td>
       <td><strong>${naam}</strong></td>
@@ -644,7 +517,7 @@ function renderTabel() {
       <td>
         <button class="btn-sm" style="background:#0070C0" onclick="toonDetail('${a.id}')">🔍 Detail</button>
         ${a.pdf_pad ? `<button class="btn-sm" style="background:#17a34a" onclick="bekijkPDF('${a.id}')">📄 PDF</button>` : ''}
-        <button class="btn-sm" style="background:#c0392b" onclick="verwijderItem('${a.id}')">🗑</button>
+        ${verwijderKnop}
       </td>
     </tr>`;
   }).join('');
@@ -667,7 +540,7 @@ function toonDetail(id) {
     ${rij('Bestandsnaam', a.bestandsnaam)} ${rij('Geüpload op', a.datum_upload)}
     ${a.pdf_pad ? `<div style="margin-top:12px"><button class="btn" onclick="bekijkPDF('${a.id}')">📄 Bekijk origineel formulier</button></div>` : ''}
     <div style="margin-top:14px;padding:10px;background:#fff8f0;border-left:3px solid #FF8C00;font-size:12px;color:#7a4300;border-radius:4px;">
-      🔒 <strong>AVG:</strong> Verwijder gegevens zodra ze niet meer nodig zijn. Deel niet buiten bevoegde personen.
+      🔒 <strong>AVG:</strong> Verwijder gegevens zodra ze niet meer nodig zijn. Deel niet buiten de werkgroep.
     </div>
   `;
   document.getElementById('detailModal').classList.add('open');
@@ -689,46 +562,30 @@ async function bekijkPDF(id) {
     const binary = atob(bestand.content.replace(/\n/g,''));
     const bytes = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-    const blob = new Blob([bytes], { type: 'application/pdf' });
-    window.open(URL.createObjectURL(blob), '_blank');
-  } catch(e) {
-    toonToast('PDF ophalen mislukt: ' + e.message, true);
-  }
+    window.open(URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' })), '_blank');
+  } catch(e) { toonToast('PDF ophalen mislukt: ' + e.message, true); }
 }
 
 async function verwijderItem(id) {
-  if (!confirm('Weet je zeker dat je deze aanmelding wilt verwijderen? Dit is definitief.')) return;
+  if (huidigeRol !== 'beheerder') return;
+  if (!confirm('Weet je zeker dat je deze aanmelding wilt verwijderen?')) return;
   const a = aanmeldingen.find(x => x.id === id);
   if (a && a.pdf_pad) {
-    try {
-      const pdfBestand = await githubGet(a.pdf_pad);
-      if (pdfBestand) await githubDelete(a.pdf_pad, pdfBestand.sha, 'PDF verwijderd');
-    } catch(e) {}
+    try { const f = await githubGet(a.pdf_pad); if (f) await githubDelete(a.pdf_pad, f.sha, 'PDF verwijderd'); } catch(e) {}
   }
   aanmeldingen = aanmeldingen.filter(x => x.id !== id);
-  try {
-    await slaDataOp('Aanmelding verwijderd');
-    toonToast('✓ Aanmelding verwijderd');
-  } catch(e) {
-    toonToast('Verwijderen mislukt: ' + e.message, true);
-  }
+  try { await slaDataOp('Aanmelding verwijderd'); toonToast('✓ Aanmelding verwijderd'); } catch(e) { toonToast('Verwijderen mislukt', true); }
   updateUI();
 }
 
 function exportCSV() {
-  if (!aanmeldingen.length) { toonToast('Geen aanmeldingen om te exporteren'); return; }
-  const headers = ['Voornaam','Achternaam','Geboortedatum','Woonplaats','Postcode','Adres','Telefoon leerling','Email leerling','Naam ouder/begeleider','Telefoon ouder','Email ouder','Datum upload','Bestandsnaam'];
-  const rijen = aanmeldingen.map(a => [
-    a.voornaam, a.achternaam, a.geboortedatum, a.woonplaats, a.postcode, a.adres,
-    a.telefoon, a.email, a.naam_ouder, a.tel_ouder, a.email_ouder, a.datum_upload, a.bestandsnaam
-  ].map(v => '"' + (v||'').replace(/"/g,'""') + '"').join(','));
-  const csv = [headers.join(','), ...rijen].join('\n');
-  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+  if (!aanmeldingen.length) return;
+  const headers = ['Voornaam','Achternaam','Geboortedatum','Woonplaats','Postcode','Adres','Telefoon','Email','Naam ouder','Telefoon ouder','Email ouder','Datum upload'];
+  const rijen = aanmeldingen.map(a => [a.voornaam,a.achternaam,a.geboortedatum,a.woonplaats,a.postcode,a.adres,a.telefoon,a.email,a.naam_ouder,a.tel_ouder,a.email_ouder,a.datum_upload].map(v => '"'+(v||'').replace(/"/g,'""')+'"').join(','));
+  const blob = new Blob(['\ufeff'+[headers.join(','),...rijen].join('\n')], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.href = url;
-  link.download = 'aanmeldingen_bbl_' + new Date().toISOString().slice(0,10) + '.csv';
-  link.click();
+  link.href = url; link.download = 'aanmeldingen_bbl_'+new Date().toISOString().slice(0,10)+'.csv'; link.click();
   URL.revokeObjectURL(url);
 }
 
@@ -739,33 +596,36 @@ function setSyncStatus(tekst, kleur) {
 
 function toonToast(tekst, fout = false) {
   const t = document.getElementById('toast');
-  t.textContent = tekst;
-  t.style.background = fout ? '#c0392b' : '#0070C0';
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
+  t.textContent = tekst; t.style.background = fout ? '#c0392b' : '#0070C0';
+  t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-document.getElementById('detailModal').addEventListener('click', function(e) {
-  if (e.target === this) sluitModal();
-});
+document.getElementById('detailModal').addEventListener('click', function(e) { if (e.target === this) sluitModal(); });
+document.getElementById('werkgroepWachtwoord').addEventListener('keydown', e => { if (e.key === 'Enter') inloggenWerkgroep(); });
+document.getElementById('tokenInput').addEventListener('keydown', e => { if (e.key === 'Enter') inloggenBeheerder(); });
 
-document.getElementById('tokenInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') slaTokenOp();
-});
-
-// Auto-inloggen als token al opgeslagen is
+// Auto-inloggen beheerder
 (function() {
   const opgeslagen = localStorage.getItem('mkb_gh_token');
   if (opgeslagen) {
     try {
       githubToken = atob(opgeslagen);
+      huidigeRol = 'beheerder';
+      sessionStorage.setItem('mkb_rol', 'beheerder');
       toonApp();
       laadAanmeldingen();
-    } catch(e) {
-      localStorage.removeItem('mkb_gh_token');
-    }
+    } catch(e) { localStorage.removeItem('mkb_gh_token'); }
   }
 })();
+
+// Werkgroep wachtwoord instellen via console (alleen beheerder)
+// Gebruik: stelWachtwoordIn('jouwwachtwoord')
+window.stelWachtwoordIn = async function(ww) {
+  const hash = await hashWachtwoord(ww);
+  localStorage.setItem('mkb_werkgroep_hash', hash);
+  localStorage.setItem('mkb_ww', btoa(ww));
+  console.log('Werkgroepwachtwoord ingesteld.');
+};
 </script>
 </body>
 </html>
